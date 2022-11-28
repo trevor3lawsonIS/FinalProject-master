@@ -1,0 +1,31 @@
+{%extends 'base.html'%}
+{% load static%}
+{% block content%}
+
+<div>
+    <h1>
+        {{rec.RecipeTitle}}
+    </h1>
+</div>
+<div>
+    <p>Current Ingredients in Recipe</p>
+    {% for recipeIngredient in recIng %}
+        <p>{{recipeIngredient.IngredientID}}</p>
+    {% endfor %}
+</div>
+<div>
+    <p>Add Ingredient:</p>
+</div>
+
+<form name="form" method="post" action="{% url 'addRecIng' %}">
+    {% csrf_token %}
+    <input type='hidden' id='rec_id' name='rec_id' value='{{rec.id}}'>
+    {% for ingredient in ing %}
+    <label for='ingredient'>{{ingredient.IngredientName}}:</label>
+    <input type="checkbok" name='ingredient' id='ingredient' value='{{rcp.RecipeTitle}}' autofocus>
+    <br><br>
+    {% endfor %}
+    <button type="submit">Update</button>
+</form>
+
+{%endblock%}
