@@ -1,0 +1,24 @@
+{%extends 'base.html'%}
+{% load static%}
+{% block content %} 
+
+<div>
+    <h1>Recipes</h1>
+</div>
+<br>
+<p>
+   {% comment %} lists all the recipies and then allows you to view or delete them {% endcomment %}
+    {% for r in rcp%}
+    <p>{{r.RecipeTitle}}</p>
+    <form name="form" method="post" action={% url 'showRecipe' r.id %}>
+        {% csrf_token %}
+        <input type = 'hidden' id='rcpID' name = 'rcpID' value = '{{r.id}}'>
+        <button type="submit">View Recipe</button>
+    </form>
+    
+
+    {%endfor%}
+</p>
+<a href={% url 'addRecipe'%}>Step 1: Add Recipe</a>
+
+{% endblock %}

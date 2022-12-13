@@ -4,10 +4,12 @@
 
 <div>
     <h1>
+        {% comment %} grabs the recipie title {% endcomment %}
         {{rec.RecipeTitle}}
     </h1>
 </div>
 <div>
+    {% comment %} Lists the ingredients in the recipie {% endcomment %}
     <p>Current Ingredients in Recipe</p>
     {% for recipeIngredient in recIng %}
         <p>{{recipeIngredient.IngredientID}}</p>
@@ -16,7 +18,7 @@
 <div>
     <p>Add Ingredient:</p>
 </div>
-
+{% comment %} creates a form that allows you to add a created ingredient {% endcomment %}
 <form name="form" method="post" action="{% url 'addRecIng' %}">
     {% csrf_token %}
     <input type='hidden' id='rec_id' name='rec_id' value='{{rec.id}}'>

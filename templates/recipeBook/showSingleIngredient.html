@@ -1,0 +1,24 @@
+{%extends 'base.html'%}
+{% load static %}
+{% block content %}
+<div class='container'>
+<div class='text-left'>
+        <h1 class='section-heading text-uppercase'>Edit Ingredient</h1>
+</div>
+
+        {% comment %} Create a form to edit the ingredient{% endcomment %}
+    <form name="form" method="post" action="{% url 'updateIng' %}">
+        {% csrf_token %}
+        <input type = 'hidden' id='ingID' name = 'ingID' value = '{{ing.id}}'>
+        <label for='name'>Ingredient Name:</label>
+        <input type="text" name='name' id='name' value='{{ing.IngredientName}}'>
+        <br><br>
+        <button type="submit">Update Ingredient</button>
+    </form>
+
+</div>
+{%endblock%}
+
+    
+    
+    
