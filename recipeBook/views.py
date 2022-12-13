@@ -16,15 +16,20 @@ def showSingleRecipePageView(request, recID) :
     if request.method == 'POST':
         recipeIngredients = Recipe_Ingredient.objects.filter(RecipeID=recID)
         recipe = Recipe.objects.get(id=recID)
-        
-        ingredientsAll = Ingredient.objects.all()
-        ingredientsUnused = Ingredient.objects.exclude(RecipeID = recID)
-        ingredientUsed = Ingredient.objects.filter(RecipeID = recID)
 
         context = {
             'rI': recipeIngredients,
             'rcp': recipe
         }
+    else:
+        recipeIngredients = Recipe_Ingredient.objects.filter(RecipeID=recID)
+        recipe = Recipe.objects.get(id=recID)
+
+        context = {
+            'rI': recipeIngredients,
+            'rcp': recipe
+        }
+
     return render(request, 'recipeBook/showSingleRecipe.html', context)
 
 def updateRecipePageView(request):
@@ -128,6 +133,13 @@ def deleteRecipePageView(request, recID):
     rec.delete()
 
     return viewRecipesPageView(request)
+
+def deleteRecipeIngredientPageView(request, recIngID):
+    recipeIngredient = Recipe_Ingredient.objects.get(id=recIngID)
+    recID = recipeIngredient.RecipeID_id
+    recipeIngredient.delete()
+
+    return showSingleRecipePageView(request, recID)
 
 def chooseIngredients(request, recID):
     ingredients = Ingredient.objects.all()

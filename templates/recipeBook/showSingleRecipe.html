@@ -23,6 +23,7 @@
         <input type='hidden' name='recIngID' id='recIngID' value={{i.id}}>
         <label name='recIng'>{{i.IngredientID.IngredientName}}</label>
         <input type='text' name='recIng' id='recIng' value='{{i.Amount}}' autofocus>
+        <a href={% url 'deleteRecipeIngredient' recIngID=i.id %}>Delete ingredient</a>
         <br>
     {%endfor%}
     <button type="submit">Save</button>

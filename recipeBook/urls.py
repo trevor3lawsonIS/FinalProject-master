@@ -17,6 +17,7 @@ from .views import deleteRecipePageView
 from .views import chooseIngredients
 from .views import addRecipeIngredientsPageView
 from .views import saveNewRecipeIngredientPageView
+from .views import deleteRecipeIngredientPageView
 urlpatterns = [
     path("", indexPageView, name="index"),
     path("create", createPageView, name="create"),
@@ -35,7 +36,8 @@ urlpatterns = [
     path('deleteRecipe/<int:recID>', deleteRecipePageView, name='deleteRecipe'),
     path('chooseIngredients/<int:recID>/', chooseIngredients, name='chooseIngredients'),
     path('addRecipeIngredient/', addRecipeIngredientsPageView, name='addRecipeIngredient'),
-    path('saveRecipeIngredients/', saveNewRecipeIngredientPageView, name = 'saveRecipeIngredient')
+    path('saveRecipeIngredients/', saveNewRecipeIngredientPageView, name = 'saveRecipeIngredient'),
+    path('deleteRecipeIngredient/<int:recIngID>/', deleteRecipeIngredientPageView, name ='deleteRecipeIngredient')
 
 
 ]
