@@ -33,7 +33,7 @@ urlpatterns = [
     path('addRecipe/', addRecipePageView, name = 'addRecipe'),
     path('deleteIngredient/<int:ingID>', deleteIngredientPageView,name='deleteIngredient'),
     path('deleteRecipe/<int:recID>', deleteRecipePageView, name='deleteRecipe'),
-    path('chooseIngredients/', chooseIngredients, name='chooseIngredients'),
+    path('chooseIngredients/<int:recID>/', chooseIngredients, name='chooseIngredients'),
     path('addRecipeIngredient/', addRecipeIngredientsPageView, name='addRecipeIngredient'),
     path('saveRecipeIngredients/', saveNewRecipeIngredientPageView, name = 'saveRecipeIngredient')
 
