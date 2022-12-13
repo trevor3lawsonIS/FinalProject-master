@@ -20,15 +20,20 @@ def showSingleRecipePageView(request, recID) :
     if request.method == 'POST':
         recipeIngredients = Recipe_Ingredient.objects.filter(RecipeID=recID)
         recipe = Recipe.objects.get(id=recID)
-        
-        # ingredientsAll = Ingredient.objects.all()
-        # ingredientsUnused = Ingredient.objects.exclude(RecipeID = recID)
-        # ingredientUsed = Ingredient.objects.exclude(RecipeID = recID)
 
         context = {
             'rI': recipeIngredients,
             'rcp': recipe
         }
+    else:
+        recipeIngredients = Recipe_Ingredient.objects.filter(RecipeID=recID)
+        recipe = Recipe.objects.get(id=recID)
+
+        context = {
+            'rI': recipeIngredients,
+            'rcp': recipe
+        }
+
     return render(request, 'recipeBook/showSingleRecipe.html', context)
 
 #allows the user to change the recipies
@@ -41,11 +46,10 @@ def updateRecipePageView(request):
         recipe.Notes = request.POST['notes']
         recipe.save()
 
-        ingredientIDList = request.POST.getlist('ingID')
         amountList = request.POST.getlist('recIng')
-        for i in range(0, len(ingredientIDList)):
-            recipeIngredient = Recipe_Ingredient.objects.filter(RecipeID_id = rec_id)
-            recipeIngredient.get(IngredientID = ingredientIDList[i])
+        recipeIngredients = request.POST.getlist('recIngID')
+        for i in range(0, len(recipeIngredients)):
+            recipeIngredient = Recipe_Ingredient.objects.get(id = recipeIngredients[i])
             recipeIngredient.Amount = amountList[i]
             recipeIngredient.save()
 
@@ -145,6 +149,13 @@ def deleteRecipePageView(request, recID):
     rec.delete()
 
     return viewRecipesPageView(request)
+
+def deleteRecipeIngredientPageView(request, recIngID):
+    recipeIngredient = Recipe_Ingredient.objects.get(id=recIngID)
+    recID = recipeIngredient.RecipeID_id
+    recipeIngredient.delete()
+
+    return showSingleRecipePageView(request, recID)
 
 #allows you to choose an ingredint 
 def chooseIngredients(request, recID):

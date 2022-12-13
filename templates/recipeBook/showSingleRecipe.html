@@ -22,14 +22,16 @@
     <br>
     <h2>Ingredients</h2>
     {% for i in rI%}
-        <input type='text' name='ingID' id='ingID' value={{i.id}}>
+        <input type='hidden' name='recIngID' id='recIngID' value={{i.id}}>
         <label name='recIng'>{{i.IngredientID.IngredientName}}</label>
         <input type='text' name='recIng' id='recIng' value='{{i.Amount}}' autofocus>
+        <a href={% url 'deleteRecipeIngredient' recIngID=i.id %}>Delete ingredient</a>
         <br>
     {%endfor%}
     <button type="submit">Save</button>
 </form>
+<a href={% url 'chooseIngredients' recID=rcp.id %}>Add Ingredients</a>
+<a href={% url 'deleteRecipe' recID=rcp.id %}>Delete Recipe</a>
 
-{% comment %} <a href={%url 'chooseIngredients'%}>Choose Ingredients</a> {% endcomment %}
 {%endblock%}
 
