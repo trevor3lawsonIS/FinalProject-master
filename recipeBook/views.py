@@ -17,9 +17,9 @@ def showSingleRecipePageView(request, recID) :
         recipeIngredients = Recipe_Ingredient.objects.filter(RecipeID=recID)
         recipe = Recipe.objects.get(id=recID)
         
-        # ingredientsAll = Ingredient.objects.all()
-        # ingredientsUnused = Ingredient.objects.exclude(RecipeID = recID)
-        # ingredientUsed = Ingredient.objects.exclude(RecipeID = recID)
+        ingredientsAll = Ingredient.objects.all()
+        ingredientsUnused = Ingredient.objects.exclude(RecipeID = recID)
+        ingredientUsed = Ingredient.objects.filter(RecipeID = recID)
 
         context = {
             'rI': recipeIngredients,
@@ -36,11 +36,10 @@ def updateRecipePageView(request):
         recipe.Notes = request.POST['notes']
         recipe.save()
 
-        ingredientIDList = request.POST.getlist('ingID')
         amountList = request.POST.getlist('recIng')
-        for i in range(0, len(ingredientIDList)):
-            recipeIngredient = Recipe_Ingredient.objects.filter(RecipeID_id = rec_id)
-            recipeIngredient.get(IngredientID = ingredientIDList[i])
+        recipeIngredients = request.POST.getlist('recIngID')
+        for i in range(0, len(recipeIngredients)):
+            recipeIngredient = Recipe_Ingredient.objects.get(id = recipeIngredients[i])
             recipeIngredient.Amount = amountList[i]
             recipeIngredient.save()
 
