@@ -3,9 +3,11 @@
 {% block content %} 
 
 <div>
+    
     <h1>Add Recipe</h1>
 </div>
 <br>
+{% comment %} creates a form to put in information about the recipie {% endcomment %}
 <form name="form" method="post" action="{% url 'saveNewRecipe' %}">
     {% csrf_token %}
 

@@ -5,6 +5,8 @@
     <h1>Edit Recipe</h1>
 </div>
 <br>
+
+{% comment %} Creates a form to edit the recipie{% endcomment %}
 <form name="form" method="post" action="{% url 'updateRec' %}">
     {% csrf_token %}
     <input type='hidden' id='rcpID' name='rcpID' value='{{rcp.id}}'>

@@ -7,6 +7,7 @@
 </div>
 <br>
 <p>
+    {% comment %} lists the ingredients and then allows ou to edit or delete them {% endcomment %}
     {% for i in ing%}
         {{i.IngredientName}}
         <a href={% url 'showIngredient' ingID=i.id %}>Edit Ingredient</a>

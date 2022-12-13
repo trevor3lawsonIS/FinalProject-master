@@ -5,6 +5,8 @@
 <div class='text-left'>
         <h1 class='section-heading text-uppercase'>Edit Ingredient</h1>
 </div>
+
+        {% comment %} Create a form to edit the ingredient{% endcomment %}
     <form name="form" method="post" action="{% url 'updateIng' %}">
         {% csrf_token %}
         <input type = 'hidden' id='ingID' name = 'ingID' value = '{{ing.id}}'>

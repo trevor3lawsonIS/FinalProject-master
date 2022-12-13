@@ -3,6 +3,7 @@
 {% block content %}
 <div class='container'>
 <div class='text-left'>
+        {% comment %} grabs the Ingredient title {% endcomment %}
         <h1 class='section-heading text-uppercase'>Update ingredients for:  {{recipe.RecipeTitle}}</h1>
 </div>   
 </div>
@@ -10,7 +11,7 @@
     <div class='text-left'>
             <h1 class='section-heading text-uppercase'>Add Ingredient</h1>
     </div>
-    
+    {% comment %} creates a form {% endcomment %}
         <form name="form" method="post" action="{% url 'saveNewIngredient' %}">
             {% csrf_token %}
             

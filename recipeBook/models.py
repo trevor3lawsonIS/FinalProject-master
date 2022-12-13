@@ -3,12 +3,14 @@ from datetime import datetime, timedelta
 
 # Create your models here.
 
+#Creates the recipie class table
 class Recipe_Class(models.Model):
   RecipeClassDescription = models.CharField(max_length=30)
 
   def __str__(self):
     return (self.RecipeClassDescription)
 
+#Creates the recipie table
 class Recipe(models.Model):
     RecipeTitle = models.CharField(max_length=50)
     Preparation = models.CharField(max_length=2000, null=True)
@@ -18,6 +20,7 @@ class Recipe(models.Model):
     def __str__(self):
         return (self.RecipeTitle)
 
+#Creates theingredient table
 class Ingredient(models.Model):
     IngredientName = models.CharField(max_length=20)
 
@@ -26,6 +29,7 @@ class Ingredient(models.Model):
     def __str__(self):
         return (self.IngredientName)
 
+#Creates the recipie incgredient table
 class Recipe_Ingredient(models.Model):
     RecipeID = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     IngredientID = models.ForeignKey(Ingredient, on_delete=models.CASCADE)

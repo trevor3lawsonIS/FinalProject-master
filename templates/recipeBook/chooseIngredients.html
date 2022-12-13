@@ -5,6 +5,8 @@
 <h1>Choose Ingredients</h1>
 <br>
 <p>
+
+    {% comment %} lists and allows you to choose the ingredient {% endcomment %}
     <form name="form" method="post" action="{% url 'addRecipeIngredient' %}">
         {% csrf_token %}
         <input type='hidden' name = 'recID'id='recID' value='{{recID}}'>

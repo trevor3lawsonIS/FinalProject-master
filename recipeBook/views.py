@@ -2,16 +2,20 @@ from django.shortcuts import render
 from recipeBook.models import Recipe, Ingredient, Recipe_Ingredient
 
 # Create your views here.
+
+#take them back to homepage
 def indexPageView(request) :
     return render(request, 'recipeBook/index.html') 
-
+    
+#takes them to the create page
 def createPageView(request) :
     return render(request, 'recipeBook/create.html')
 
-
+#shows them the recipies
 def readPageView(request) :
     return render(request, 'recipeBook/read.html') 
 
+#shows a single reciepie to the user
 def showSingleRecipePageView(request, recID) :
     if request.method == 'POST':
         recipeIngredients = Recipe_Ingredient.objects.filter(RecipeID=recID)
@@ -27,6 +31,7 @@ def showSingleRecipePageView(request, recID) :
         }
     return render(request, 'recipeBook/showSingleRecipe.html', context)
 
+#allows the user to change the recipies
 def updateRecipePageView(request):
     if request.method == 'POST':
         rec_id = request.POST['rcpID']
@@ -46,6 +51,7 @@ def updateRecipePageView(request):
 
     return showSingleRecipePageView(request, rec_id)
 
+#save your recipies
 def saveNewRecipePageView(request):
     if request.method == 'POST':
         recipe = Recipe()
@@ -57,6 +63,7 @@ def saveNewRecipePageView(request):
         recID = recipe.id
     return chooseIngredients(request, recID)
 
+#shows a certin ingredient chosen
 def showSingleIngPageView(request, ingID):
     if request.method == 'POST':
         ingredient = Ingredient.objects.get(id=ingID)
@@ -67,6 +74,7 @@ def showSingleIngPageView(request, ingID):
     }
     return render(request, 'recipeBook/showSingleIngredient.html', context)
 
+#updates the ingredint information
 def updateIngPageView(request) :
     if request.method == 'POST':
         ing_id = request.POST['ingID']
@@ -75,6 +83,7 @@ def updateIngPageView(request) :
         ingredient.save()
     return viewIngredientsPageView(request)
 
+#Saves a new ingredient
 def saveNewIngredientPageView(request) :
     if request.method == 'POST':
         ingredient = Ingredient()
@@ -83,12 +92,15 @@ def saveNewIngredientPageView(request) :
         
     return viewIngredientsPageView(request)
 
+#takes you to the add ingredient page
 def addIngredientPageView(request):
     return render(request, 'recipeBook/addIngredient.html')
 
+#Takes you to the add recipie page
 def addRecipePageView(request):
     return render(request, 'recipeBook/addRecipe.html')
 
+#Allows you to update a recipie ingredient and then takes you to the update recipe ingredint page
 def updateRecipeIngredient(request, rec_id):
     recipe = Recipe.objects.get(id=rec_id)
     recIngredients = Recipe_Ingredient.objects.filter(RecipeID_id = rec_id)
@@ -103,6 +115,7 @@ def updateRecipeIngredient(request, rec_id):
 
     return render(request, 'recipeBook/updateRecipeIngredients.html', context)
 
+#displays recipies
 def viewRecipesPageView(request):
     recipes = Recipe.objects.all()
     context = {
@@ -110,6 +123,7 @@ def viewRecipesPageView(request):
     }
     return render(request, 'recipeBook/showRecipes.html', context)
 
+#displays ingredients
 def viewIngredientsPageView(request):
     ingredients = Ingredient.objects.all()
     
@@ -118,18 +132,21 @@ def viewIngredientsPageView(request):
     }
     return render(request, 'recipeBook/showIngredients.html', context)
 
+#deletes ingredients
 def deleteIngredientPageView(request, ingID):
     ing = Ingredient.objects.get(id=ingID)
     ing.delete()
     
     return viewIngredientsPageView(request)
 
+#deletes a recipie
 def deleteRecipePageView(request, recID):
     rec = Recipe.objects.get(id=recID)
     rec.delete()
 
     return viewRecipesPageView(request)
 
+#allows you to choose an ingredint 
 def chooseIngredients(request, recID):
     ingredients = Ingredient.objects.all()
     context = {
@@ -138,6 +155,7 @@ def chooseIngredients(request, recID):
     }
     return render(request, 'recipeBook/chooseIngredients.html', context)
 
+#creates a recpie ingredient
 def addRecipeIngredientsPageView(request):
     if request.method == 'POST':
         recID = request.POST['recID']
@@ -151,6 +169,7 @@ def addRecipeIngredientsPageView(request):
 
     return render(request, 'recipeBook/addRecipeIngredient.html', context)
 
+#saves the new recipie ingredient
 def saveNewRecipeIngredientPageView(request):
     if request.method == 'POST':
         recID = request.POST['recID']

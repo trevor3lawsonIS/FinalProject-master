@@ -4,6 +4,8 @@
 
 <h1>Add Recipe Ingredient</h1>
 
+{% comment %} Creates a form to save the recipie {% endcomment %}
+
 <form name="form" method="post" action="{% url 'saveRecipeIngredient' %}">
     {% csrf_token %}
     <input type='hidden' name='recID' id='recID' value={{recID}}>

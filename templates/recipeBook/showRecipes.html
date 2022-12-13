@@ -7,7 +7,7 @@
 </div>
 <br>
 <p>
-   
+   {% comment %} lists all the recipies and then allows you to view or delete them {% endcomment %}
     {% for r in rcp%}
     <p>{{r.RecipeTitle}}</p>
     <form name="form" method="post" action={% url 'showRecipe' r.id %}>
