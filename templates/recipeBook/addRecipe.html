@@ -1,0 +1,26 @@
+{%extends 'base.html'%}
+{% load static%}
+{% block content %} 
+
+<div>
+    <h1>Add Recipe</h1>
+</div>
+<br>
+<form name="form" method="post" action="{% url 'saveNewRecipe' %}">
+    {% csrf_token %}
+
+    <label for='title'>Recipe Name:</label>
+    <input type="text" name='title' id='title' autofocus>
+    <br><br>
+    <label for='preparation'>Preperation:</label>
+    <input type="text" name='preparation' id='preparation'>
+    <br><br>
+    <label for='notes'>Notes:</label>
+    <input type="text" name='notes' id='notes'>
+    <br><br>
+    <button type="submit">Step 2: Choose Ingredients</button>
+</form>
+
+
+
+{% endblock %}

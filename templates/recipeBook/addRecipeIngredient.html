@@ -1,0 +1,21 @@
+{%extends 'base.html'%}
+{% load static%}
+{% block content %} 
+
+<h1>Add Recipe Ingredient</h1>
+
+<form name="form" method="post" action="{% url 'saveRecipeIngredient' %}">
+    {% csrf_token %}
+    <input type='hidden' name='recID' id='recID' value={{recID}}>
+    {% for i in ingredients%}
+        <input type='hidden' name='ingID' id='ingID' value={{i.id}}>
+        <label name='recIng'>{{i.IngredientName}} Amount</label>
+        <input type='text' name='recIng' id='recIng' autofocus>
+    {%endfor%}
+    <button type='submit'>Save New Recipe</button>
+</form>
+
+
+
+
+{% endblock %}

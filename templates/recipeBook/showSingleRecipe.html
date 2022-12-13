@@ -1,0 +1,33 @@
+{%extends 'base.html'%}
+{% load static%}
+{% block content %} 
+<div>
+    <h1>Edit Recipe</h1>
+</div>
+<br>
+<form name="form" method="post" action="{% url 'updateRec' %}">
+    {% csrf_token %}
+    <input type='hidden' id='rcpID' name='rcpID' value='{{rcp.id}}'>
+
+    <label for='title'>Recipe Name:</label>
+    <input type="text" name='title' id='title' value='{{rcp.RecipeTitle}}' autofocus>
+    <br>
+    <label for='preparation'>Preparation:</label>
+    <input type="text" name='preparation' id='preparation' value='{{rcp.Preparation}}'>
+    <br>
+    <label for='notes'>Notes:</label>
+    <input type="text" name='notes' id='notes' value='{{rcp.Notes}}'>
+    <br>
+    <h2>Ingredients</h2>
+    {% for i in rI%}
+        <input type='text' name='ingID' id='ingID' value={{i.id}}>
+        <label name='recIng'>{{i.IngredientID.IngredientName}}</label>
+        <input type='text' name='recIng' id='recIng' value='{{i.Amount}}' autofocus>
+        <br>
+    {%endfor%}
+    <button type="submit">Save</button>
+</form>
+
+{% comment %} <a href={%url 'chooseIngredients'%}>Choose Ingredients</a> {% endcomment %}
+{%endblock%}
+

@@ -1,0 +1,19 @@
+{%extends 'base.html'%}
+{% load static%}
+{% block content %} 
+
+<div>
+    <h1>Ingredients</h1>
+</div>
+<br>
+<p>
+    {% for i in ing%}
+        {{i.IngredientName}}
+        <a href={% url 'showIngredient' ingID=i.id %}>Edit Ingredient</a>
+        <a href={% url 'deleteIngredient' ingID=i.id %}>Delete Ingredient</a>
+        <br>
+    {%endfor%}
+<a href = {% url 'addIngredient' %}>Add Ingredient</a>
+</p>
+
+{% endblock %}

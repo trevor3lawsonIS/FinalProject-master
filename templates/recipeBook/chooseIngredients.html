@@ -1,0 +1,20 @@
+{%extends 'base.html'%}
+{% load static%}
+{% block content %} 
+
+<h1>Choose Ingredients</h1>
+<br>
+<p>
+    <form name="form" method="post" action="{% url 'addRecipeIngredient' %}">
+        {% csrf_token %}
+        <input type='hidden' name = 'recID'id='recID' value='{{recID}}'>
+        {% for i in ingredients%}
+        <label for='ingredient'>{{i.IngredientName}}</label>
+        <input type="checkbox" name='array' id='array' value='{{i.id}}' autofocus>
+        <br>
+        {%endfor%}
+        <button type='submit'>Step 3: Add Amounts</button>
+    </form>  
+</p>
+
+{% endblock %}
